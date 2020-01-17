@@ -15,7 +15,7 @@ emoji==0.5.4
 entrypoints==0.3
 flake8==3.7.9
 Flask==1.1.1
-gunicorn
+gunicorn==20.0.4
 idna==2.8
 imagesize==1.1.0
 itsdangerous==1.1.0
