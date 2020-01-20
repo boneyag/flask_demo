@@ -1,7 +1,8 @@
 from dotenv import load_dotenv
 import os
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
+import requests
 
 load_dotenv()
 
@@ -15,7 +16,19 @@ from models import Result
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    return render_template('index.html')
+    errors = []
+    results = []
+    
+    if request.method == 'POST':
+        try:
+            url = request.form['url']
+            r = requests.get(url)
+            print(r.text)
+        except:
+            errors.append(
+                "Unable to get URL. Please make sure it's valid try again."
+            )
+    return render_template('index.html', errors=errors, results=results)
 
 if __name__ == '__main__':
     app.run()
